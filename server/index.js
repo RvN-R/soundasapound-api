@@ -65,7 +65,7 @@ async function getCurrencyLayerResponse() {
 async function getTodaysDate() {
   const date = new Date();
   year = date.getFullYear();
-  month = date.getMonth();
+  month = date.getMonth() + 1;
   day = date.getUTCDate();
   time = date.toLocaleTimeString();
   todaysDate = `${year}-${month}-${day}-${time}`;
@@ -89,8 +89,6 @@ async function postToMongo() {
   }
 }
 
-// postToMongo();
-
 const tweet = async () => {
   const value = await getCurrencyLayerResponse();
   const ukPound = String.fromCodePoint(0x00a3);
@@ -106,8 +104,6 @@ const tweet = async () => {
     console.log(err);
   }
 };
-
-// tweet();
 
 const job = new CronJob("0 08 * * *", () => {
   postToMongo();
